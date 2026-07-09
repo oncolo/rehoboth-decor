@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- English -->
+  <url>
+    <loc>https://habeshadecor.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://habeshadecor.com/en"/>
+    <xhtml:link rel="alternate" hreflang="am" href="https://habeshadecor.com/am"/>
+    <xhtml:link rel="alternate" hreflang="om" href="https://habeshadecor.com/om"/>
+    <xhtml:link rel="alternate" hreflang="ti" href="https://habeshadecor.com/ti"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url><loc>https://habeshadecor.com/en/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/en/gallery</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://habeshadecor.com/en/booking</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/en/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Amharic -->
+  <url><loc>https://habeshadecor.com/am</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://habeshadecor.com/am/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/am/gallery</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://habeshadecor.com/am/booking</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/am/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Afaan Oromoo -->
+  <url><loc>https://habeshadecor.com/om</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://habeshadecor.com/om/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/om/gallery</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://habeshadecor.com/om/booking</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/om/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- Tigrinya -->
+  <url><loc>https://habeshadecor.com/ti</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://habeshadecor.com/ti/services</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/ti/gallery</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://habeshadecor.com/ti/booking</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://habeshadecor.com/ti/about</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+</urlset>
