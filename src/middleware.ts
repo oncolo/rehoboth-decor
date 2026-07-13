@@ -8,7 +8,7 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(req: NextRequest) {
-  const isAdminDeployment = process.env.NEXT_PUBLIC_DEPLOYMENT === "admin";
+  const isAdminDeployment = process.env.DEPLOYMENT === "admin";
   const { pathname } = req.nextUrl;
 
   // ── ADMIN DEPLOYMENT ──────────────────────────────────────
