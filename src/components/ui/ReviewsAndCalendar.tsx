@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 const reviews = [
-  { name: "Tigist B.",    rating: 5, date: "2 weeks ago",  text: "Absolutely magical! Our Enkutatash party was beyond beautiful. Habesha Decor understood our culture perfectly." },
+  { name: "Tigist B.",    rating: 5, date: "2 weeks ago",  text: "Absolutely magical! Our Enkutatash party was beyond beautiful. Rehoboth Decor understood our culture perfectly." },
   { name: "Mohammed A.", rating: 5, date: "1 month ago",  text: "Best decorator in Philadelphia! Our Nikaah ceremony was breathtaking. Every detail was perfect." },
   { name: "Hiwot G.",    rating: 5, date: "1 month ago",  text: "They transformed our daughter's graduation into a royal celebration. Worth every penny!" },
   { name: "Yohannes T.", rating: 5, date: "2 months ago", text: "Our Mels ceremony was stunning. The cultural details were authentic and the florals were gorgeous." },
@@ -61,13 +61,28 @@ export function GoogleReviews() {
 }
 
 export function AvailabilityCalendar() {
-  const [month] = useState(new Date());
+  const [current, setCurrent] = useState(new Date());
+  const [bookedDates, setBookedDates] = useState<string[]>([]);
   const ui = useTranslations("ui");
-  const year = month.getFullYear();
-  const m = month.getMonth();
+  const year = current.getFullYear();
+  const m = current.getMonth();
   const daysInMonth = new Date(year, m + 1, 0).getDate();
   const firstDay = new Date(year, m, 1).getDay();
-  const monthName = month.toLocaleString("default", { month: "long", year: "numeric" });
+  const monthName = current.toLocaleString("default", { month: "long", year: "numeric" });
+
+  function prevMonth() { setCurrent(new Date(year, m - 1, 1)); }
+  function nextMonth() { setCurrent(new Date(year, m + 1, 1)); }
+
+  useEffect(() => {
+    fetch("/api/calendar")
+      .then(res => res.json())
+      .then(data => {
+        if (data.dates) {
+          setBookedDates(data.dates);
+        }
+      })
+      .catch(err => console.error("Failed to load availability", err));
+  }, []);
 
   return (
     <section className="py-20 px-4 bg-charcoal">
@@ -82,7 +97,11 @@ export function AvailabilityCalendar() {
         <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}
           className="bg-white/5 rounded-2xl border border-gold/20 p-6"
         >
-          <p className="text-gold font-serif text-center text-lg mb-4">{monthName}</p>
+          <div className="flex items-center justify-between mb-4">
+            <button onClick={prevMonth} className="text-gold hover:bg-gold/10 rounded-full w-8 h-8 flex items-center justify-center text-xl transition-colors">‹</button>
+            <p className="text-gold font-serif text-lg">{monthName}</p>
+            <button onClick={nextMonth} className="text-gold hover:bg-gold/10 rounded-full w-8 h-8 flex items-center justify-center text-xl transition-colors">›</button>
+          </div>
           <div className="grid grid-cols-7 gap-1 mb-2">
             {["Su","Mo","Tu","We","Th","Fr","Sa"].map(d => (
               <div key={d} className="text-cream/30 text-xs text-center py-1">{d}</div>
@@ -91,8 +110,10 @@ export function AvailabilityCalendar() {
           <div className="grid grid-cols-7 gap-1">
             {Array.from({ length: firstDay }).map((_, i) => <div key={`e${i}`} />)}
             {Array.from({ length: daysInMonth }, (_, i) => i + 1).map(day => {
-              const booked = BOOKED.includes(day);
-              const today = new Date().getDate() === day;
+              const dateStr = `${year}-${String(m + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+              const booked = bookedDates.includes(dateStr);
+              const todayStr2 = new Date().toISOString().split("T")[0];
+              const today = dateStr === todayStr2;
               return (
                 <div key={day}
                   className={`aspect-square rounded-lg flex items-center justify-center text-xs font-medium transition-colors

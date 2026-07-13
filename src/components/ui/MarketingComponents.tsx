@@ -36,7 +36,7 @@ export function AwardsBanner() {
 export function WhatsAppButton() {
   return (
     <a
-      href="https://wa.me/14848406162?text=Hello%20Habesha%20Decor!%20I%20would%20like%20to%20inquire%20about%20your%20services."
+      href="https://wa.me/14848406162?text=Hello%20Rehoboth%20Decor!%20I%20would%20like%20to%20inquire%20about%20your%20services."
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-24 right-6 z-40 w-14 h-14 bg-green-500 hover:bg-green-400 rounded-full flex items-center justify-center shadow-2xl transition-colors"

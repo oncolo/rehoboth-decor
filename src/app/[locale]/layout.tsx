@@ -14,9 +14,9 @@ export function generateStaticParams() {
 }
 
 const localeTitles: Record<string, string> = {
-  en: "Habesha Decor | Ethiopian Event Decoration Philadelphia",
+  en: "Rehoboth Decor | Ethiopian Event Decoration Philadelphia",
   am: "ሀበሻ ዲኮር | የኢትዮጵያ ዝግጅት ማስዋቢያ ፊላደልፊያ",
-  om: "Habesha Decor | Miidhagina Ayyaana Itoophiyaa Philadelphia",
+  om: "Rehoboth Decor | Miidhagina Ayyaana Itoophiyaa Philadelphia",
   ti: "ሃበሻ ዲኮር | ናይ ኢትዮጵያ ዝግጅት ምስሕ ፊላደልፊያ",
 };
 
@@ -32,11 +32,10 @@ export async function generateMetadata({ params: { locale } }: { params: { local
     title: localeTitles[locale] ?? localeTitles.en,
     description: localeDescriptions[locale] ?? localeDescriptions.en,
     alternates: {
-      canonical: `https://habeshadecor.com/${locale}`,
       languages: { en: "/en", am: "/am", om: "/om", ti: "/ti" },
     },
     openGraph: {
-      url: `https://habeshadecor.com/${locale}`,
+      url: `https://rehobothdecor.com/${locale}`,
       title: localeTitles[locale] ?? localeTitles.en,
       description: localeDescriptions[locale] ?? localeDescriptions.en,
     },
@@ -46,9 +45,9 @@ export async function generateMetadata({ params: { locale } }: { params: { local
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  name: "Habesha Decor",
+  name: "Rehoboth Decor",
   description: "Ethiopian & international event decoration studio in Philadelphia, PA.",
-  url: "https://habeshadecor.com",
+  url: "https://rehobothdecor.com",
   telephone: "+1-484-840-6162",
   address: {
     "@type": "PostalAddress",
@@ -57,7 +56,7 @@ const jsonLd = {
     addressCountry: "US",
   },
   geo: { "@type": "GeoCoordinates", latitude: 39.9526, longitude: -75.1652 },
-  image: "https://habeshadecor.com/images/og-image.jpg",
+  image: "https://rehobothdecor.com/images/og-image.jpg",
   priceRange: "$$",
   servesCuisine: "Ethiopian",
   sameAs: [],
@@ -78,23 +77,19 @@ export default async function LocaleLayout({
   const isEthiopic = locale === "am" || locale === "ti";
 
   return (
-    <html lang={locale} className={isEthiopic ? "font-ethiopic" : ""}>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </ThemeProvider>
-        </NextIntlClientProvider>
-        <ChatWidget locale={locale} />
-      </body>
-    </html>
+    <div lang={locale} className={isEthiopic ? "font-ethiopic" : ""}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <NextIntlClientProvider messages={messages}>
+        <ThemeProvider>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
+      </NextIntlClientProvider>
+      <ChatWidget locale={locale} />
+    </div>
   );
 }

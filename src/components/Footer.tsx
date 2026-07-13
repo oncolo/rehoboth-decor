@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -16,16 +17,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-charcoal text-cream/70 py-10 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <footer className="bg-charcoal text-cream/70 py-14 px-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10">
         <div>
-          <p className="text-gold font-serif text-lg font-bold mb-2">Habesha Decor</p>
+          <div className="flex items-center gap-3 mb-4">
+            <Image src="/images/logo.jpg" alt="Rehoboth Decor" width={64} height={64} className="rounded-full object-cover border-2 border-gold/30" />
+            <p className="text-gold font-serif text-xl font-bold">Rehoboth Decor</p>
+          </div>
           <p className="text-sm">{t("tagline")}</p>
           <p className="text-sm mt-1">{t("address")}</p>
         </div>
         <div>
-          <p className="text-gold font-semibold mb-2 text-sm uppercase tracking-wider">Pages</p>
-          <ul className="space-y-1 text-sm">
+          <p className="text-gold font-semibold mb-3 text-sm uppercase tracking-wider">Pages</p>
+          <ul className="space-y-2 text-sm">
             {navLinks.map(({ slug, label }) => (
               <li key={slug}>
                 <Link href={`/${locale}/${slug}`} className="hover:text-gold transition-colors">{label}</Link>
@@ -34,19 +38,22 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <p className="text-gold font-semibold mb-2 text-sm uppercase tracking-wider">Contact</p>
+          <p className="text-gold font-semibold mb-3 text-sm uppercase tracking-wider">Contact</p>
           <p className="text-sm">Philadelphia, PA & Greater Tristate Area</p>
-          <p className="text-sm mt-1">info@habeshadecor.com</p>
-          <a href="tel:+14848406162" className="text-sm mt-1 block hover:text-gold transition-colors">+1 (484) 840-6162</a>
+          <p className="text-sm mt-2">info@rehobothdecor.com</p>
+          <a href="tel:+14848406162" className="text-sm mt-2 block hover:text-gold transition-colors">+1 (484) 840-6162</a>
         </div>
       </div>
-      <div className="mt-8 border-t border-gold/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div className="mt-10 border-t border-gold/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p className="text-center text-xs text-cream/40">
-          © {new Date().getFullYear()} Habesha Decor — {t("rights")}
+          © {new Date().getFullYear()} Rehoboth Decor — {t("rights")}
         </p>
-        <p className="text-xs text-cream/30">
-          Developed by <span className="text-gold/70 font-semibold">Daniel Abera</span>
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="text-xs text-cream/30">
+            Developed by <span className="text-gold/70 font-semibold">Daniel Abera</span>
+          </p>
+          <Link href="/admin" className="text-xs text-cream/20 hover:text-gold/50 transition-colors">Admin</Link>
+        </div>
       </div>
     </footer>
   );

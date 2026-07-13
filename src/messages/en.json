@@ -137,7 +137,7 @@
     "success_title": "Request Sent!",
     "success_body": "We'll get back to you within 24 hours.",
     "budget_options": ["$1,000–$3,000", "$3,000–$5,000", "$5,000–$10,000", "$10,000+"],
-    "event_options": ["Traditional Wedding (Mels/Melse)", "European Style Wedding", "Nikaah", "Enkutatash", "Genna/Timkat/Fasika", "Eid", "Corporate Event", "Graduation", "Baby Shower", "Other"]
+    "event_options": ["Traditional Wedding (Mels/Melse)", "European Style Wedding", "Wedding Shower", "Nikaah", "Enkutatash", "Genna/Timkat/Fasika", "Eid", "Baby Shower", "Birthday Party", "Graduation", "Corporate Event", "Other"]
   },
   "home": {
     "learn_more": "Learn More",

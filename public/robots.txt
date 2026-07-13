@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://habeshadecor.com/sitemap.xml
+Sitemap: https://Rehoboth-Decor.com/sitemap.xml

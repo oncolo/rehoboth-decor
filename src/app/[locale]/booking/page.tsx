@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { useForm, ValidationError } from "@formspree/react";
+import { useState, useEffect } from "react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -11,12 +11,73 @@ const fadeUp = {
 
 export default function BookingPage() {
   const t = useTranslations("booking");
-  const budgetOptions = t.raw("budget_options") as string[];
+  const fallbackBudgetOptions = t.raw("budget_options") as string[];
+  const [budgetOptions, setBudgetOptions] = useState<string[]>(fallbackBudgetOptions);
   const eventOptions = t.raw("event_options") as string[];
-  const [state, handleSubmit] = useForm("xojoonej");
+  
+  useEffect(() => {
+    fetch("/api/settings?key=budget_ranges")
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          setBudgetOptions(data);
+        }
+      })
+      .catch(console.error);
+  }, []);
 
-  const inputClass = "w-full border border-charcoal/20 rounded-lg px-4 py-2.5 text-sm bg-white dark:bg-white/5 text-charcoal dark:text-cream focus:outline-none focus:border-gold transition-colors";
+  const [submitting, setSubmitting] = useState(false);
+  const [succeeded, setSucceeded] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitting(true);
+    setError("");
+    const fd = new FormData(e.currentTarget);
+    const d = Object.fromEntries(fd.entries());
+    
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: d.name,
+          phone: d.phone,
+          date: d.date,
+          location: d.location,
+          message: d.message,
+          event_type: d.event_type,
+          budget: d.budget
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to submit");
+      }
+      
+      setSubmitting(false);
+      setSucceeded(true);
+    } catch (err) {
+      setSubmitting(false);
+      setError("Failed to submit booking. Please try again.");
+    }
+  }
+
+  const state = { succeeded, submitting };
+
+  const inputClass = "w-full border border-charcoal/20 rounded-lg px-4 py-2.5 text-sm bg-white dark:bg-[#1a1a1a] text-charcoal dark:text-cream focus:outline-none focus:border-gold transition-colors [&>option]:bg-white [&>option]:dark:bg-[#1a1a1a] [&>option]:text-charcoal [&>option]:dark:text-cream";
   const labelClass = "block text-sm font-medium text-charcoal dark:text-cream/80 mb-1";
+
+  const [budget, setBudget] = useState("");
+
+  function handleEventChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const event = e.target.value;
+    if (event.includes("European Style Wedding")) setBudget("$10,000+");
+    else if (event.includes("Traditional Wedding") || event.includes("Corporate")) setBudget("$5,000–$10,000");
+    else if (event.includes("Nikaah") || event.includes("Holiday") || event.includes("Eid") || event.includes("Fasika")) setBudget("$3,000–$5,000");
+    else if (event) setBudget("$1,000–$3,000");
+  }
 
   return (
     <div className="bg-cream dark:bg-[#0d0d0d] min-h-screen">
@@ -55,19 +116,18 @@ export default function BookingPage() {
                     type={field === "date" ? "date" : field === "phone" ? "tel" : "text"}
                     name={field} required className={inputClass}
                   />
-                  <ValidationError field={field} errors={state.errors} className="text-red-500 text-xs mt-1" />
                 </div>
               ))}
               <div>
                 <label className={labelClass}>{t("event_type")}</label>
-                <select name="event_type" required className={inputClass}>
+                <select name="event_type" required className={inputClass} onChange={handleEventChange}>
                   <option value="">{t("select_placeholder")}</option>
                   {eventOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
               </div>
               <div>
                 <label className={labelClass}>{t("budget")}</label>
-                <select name="budget" required className={inputClass}>
+                <select name="budget" required className={inputClass} value={budget} onChange={e => setBudget(e.target.value)}>
                   <option value="">{t("select_placeholder")}</option>
                   {budgetOptions.map((opt) => <option key={opt} value={opt}>{opt}</option>)}
                 </select>
@@ -76,7 +136,7 @@ export default function BookingPage() {
                 <label className={labelClass}>{t("message")}</label>
                 <textarea name="message" rows={4} className={`${inputClass} resize-none`} />
               </div>
-              <ValidationError errors={state.errors} className="text-red-500 text-sm text-center" />
+              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
               <button
                 type="submit"
                 disabled={state.submitting}

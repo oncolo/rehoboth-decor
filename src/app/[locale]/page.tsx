@@ -1,3 +1,23 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
@@ -117,7 +137,7 @@ export default function HomePage() {
       {/* ══════════ HERO ══════════ */}
       <section className="relative min-h-[92vh] flex items-center justify-center bg-charcoal overflow-hidden">
         {/* Video */}
-        <video autoPlay muted loop playsInline
+        <video autoPlay muted loop playsInline preload="auto"
           className="absolute inset-0 w-full h-full object-cover opacity-100">
           <source src="/hero-video.mp4" type="video/mp4" />
         </video>
@@ -454,7 +474,7 @@ export default function HomePage() {
             <p className="font-serif text-cream/80 text-lg sm:text-2xl italic relative z-10 max-w-3xl mx-auto leading-relaxed">
               "{th("quote")}"
             </p>
-            <p className="text-gold text-sm mt-4 relative z-10">— Habesha Decor</p>
+            <p className="text-gold text-sm mt-4 relative z-10">— Rehoboth Decor</p>
           </motion.div>
         </div>
       </section>

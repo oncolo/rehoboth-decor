@@ -14,10 +14,10 @@ const LANGS: { code: Lang; label: string; flag: string }[] = [
 ];
 
 const WELCOME: Record<Lang, string> = {
-  en: "👋 Welcome to Habesha Decor! How can we help you today?",
-  am: "👋 ወደ ሀበሻ ዲኮር እንኳን ደህና መጡ! ዛሬ እንዴት ልንረዳዎ እንችላለን?",
-  om: "👋 Baga Habesha Decor dhuftan! Maal gochuu dandeenyaa?",
-  ti: "👋 ናብ ሃበሻ ዲኮር እንኳን ብደሓን! ብኸመይ ክንሕግዘኩም ንኽእል?",
+  en: "👋 Welcome to Rehoboth Decor! How can we help you today?",
+  am: "👋 ወደ Rehoboth Decor እንኳን ደህና መጡ! ዛሬ እንዴት ልንረዳዎ እንችላለን?",
+  om: "👋 Baga Rehoboth Decor dhuftan! Maal gochuu dandeenyaa?",
+  ti: "👋 ናብ Rehoboth Decor እንኳን ብደሓን! ብኸመይ ክንሕግዘኩም ንኽእል?",
 };
 
 const QUICK: Record<Lang, string[]> = {
@@ -92,7 +92,7 @@ export default function ChatWidget({ locale }: { locale?: string }) {
               style={{ background: "linear-gradient(90deg,#c9982a,#D4AF37,#e8c84a)" }}
             >
               <div>
-                <p className="font-bold text-sm text-black">Habesha Decor</p>
+                <p className="font-bold text-sm text-black">Rehoboth Decor</p>
                 <p className="text-[10px] text-black/60 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-700 inline-block" />
                   Philadelphia, PA

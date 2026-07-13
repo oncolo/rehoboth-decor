@@ -39,12 +39,18 @@ export default function VoiceChatWidget() {
             style={{ maxHeight: "480px" }}
           >
             <div className="flex items-center justify-between px-4 py-3 border-b border-gold/10">
-              <span className="font-serif text-gold text-sm font-semibold">Habesha Decor</span>
+              <span className="font-serif text-gold text-sm font-semibold">Rehoboth Decor</span>
               <LiveCallButton />
             </div>
             <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 min-h-[160px]">
               {notes.length === 0 && (
-                <p className="text-cream/30 text-xs text-center mt-8">{t("placeholder")}</p>
+                <div className="flex flex-col items-center justify-center h-full pt-6 gap-3">
+                  <a href="tel:+14848406162" className="flex items-center gap-3 bg-green-600 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-2xl transition-colors text-sm w-full justify-center">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6.5 6.5l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Call +1 (484) 840-6162
+                  </a>
+                  <p className="text-cream/30 text-xs text-center">{t("placeholder")}</p>
+                </div>
               )}
               {notes.map((note) => (
                 <div key={note.id} className="flex justify-end">

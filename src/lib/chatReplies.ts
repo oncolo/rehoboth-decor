@@ -10,9 +10,9 @@ const replies: Reply[] = [
     keywords: ["hello", "hi", "hey", "selam", "salam", "ሰላም", "akkam", "nagaa"],
     response: {
       en: "👋 Welcome to Rehoboth Decor! How can we help you today?",
-      am: "👋 ወደ Rehoboth Decor እንኳን ደህና መጡ! ዛሬ እንዴት ልንረዳዎ እንችላለን?",
+      am: "👋 ወደ ሀበሻ ዲኮር እንኳን ደህና መጡ! ዛሬ እንዴት ልንረዳዎ እንችላለን?",
       om: "👋 Baga Rehoboth Decor dhuftan! Maal gochuu dandeenyaa?",
-      ti: "👋 ናብ Rehoboth Decor እንኳን ብደሓን! ብኸመይ ክንሕግዘኩም ንኽእል?",
+      ti: "👋 ናብ ሃበሻ ዲኮር እንኳን ብደሓን! ብኸመይ ክንሕግዘኩም ንኽእል?",
     },
   },
   {

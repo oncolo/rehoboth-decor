@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
           <tr><td style="padding:8px 0;color:#666;">Budget</td><td style="padding:8px 0;font-weight:600;">${budget}</td></tr>
           ${message ? `<tr><td style="padding:8px 0;color:#666;vertical-align:top;">Message</td><td style="padding:8px 0;">${message}</td></tr>` : ""}
         </table>
-        <p style="margin-top:24px;color:#999;font-size:12px;">Sent from rehoboth-decor.vercel.app</p>
+        <p style="margin-top:24px;color:#999;font-size:12px;">Sent from habesha-decor.vercel.app</p>
       </div>
     `,
   });
