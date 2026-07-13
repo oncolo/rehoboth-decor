@@ -7,23 +7,34 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
+const isAdminDeployment = process.env.NEXT_PUBLIC_DEPLOYMENT === "admin";
+
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Skip API routes
-  if (pathname.startsWith("/api")) return NextResponse.next();
-
-  // Admin login page — no auth check, just pass through
-  if (pathname === "/admin-login") return NextResponse.next();
-
-  // Admin pages — check cookie
-  if (pathname.startsWith("/admin")) {
-    const cookie = req.cookies.get("admin_token")?.value;
-    if (cookie !== "authenticated") {
+  // ── ADMIN DEPLOYMENT ──────────────────────────────────────
+  if (isAdminDeployment) {
+    // Block all public pages — only /admin* and /api* allowed
+    if (!pathname.startsWith("/admin") && !pathname.startsWith("/api")) {
       return NextResponse.redirect(new URL("/admin-login", req.url));
+    }
+    // Protect /admin/* routes (not /admin-login)
+    if (pathname.startsWith("/admin") && pathname !== "/admin-login") {
+      const cookie = req.cookies.get("admin_token")?.value;
+      if (cookie !== "authenticated") {
+        return NextResponse.redirect(new URL("/admin-login", req.url));
+      }
     }
     return NextResponse.next();
   }
+
+  // ── FRONTEND DEPLOYMENT ───────────────────────────────────
+  // Block all admin routes on frontend
+  if (pathname.startsWith("/admin")) {
+    return NextResponse.redirect(new URL("/en", req.url));
+  }
+
+  if (pathname.startsWith("/api")) return NextResponse.next();
 
   return intlMiddleware(req);
 }
