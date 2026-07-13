@@ -7,9 +7,8 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
-const isAdminDeployment = process.env.NEXT_PUBLIC_DEPLOYMENT === "admin";
-
 export default function middleware(req: NextRequest) {
+  const isAdminDeployment = process.env.NEXT_PUBLIC_DEPLOYMENT === "admin";
   const { pathname } = req.nextUrl;
 
   // ── ADMIN DEPLOYMENT ──────────────────────────────────────
