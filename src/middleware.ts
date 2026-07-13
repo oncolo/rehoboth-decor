@@ -8,7 +8,10 @@ const intlMiddleware = createMiddleware({
 });
 
 export default function middleware(req: NextRequest) {
-  const isAdminDeployment = process.env.DEPLOYMENT === "admin";
+  const hostname = req.headers.get("host") ?? "";
+  const isAdminDeployment =
+    process.env.DEPLOYMENT === "admin" ||
+    hostname.includes("rehoboth-admin");
   const { pathname } = req.nextUrl;
 
   // ── ADMIN DEPLOYMENT ──────────────────────────────────────
